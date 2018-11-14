@@ -1,0 +1,281 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <div class="sidebar">
+        <h4>Phase 1 ( 3 Days )</h4>
+        <ol class="nav nav-pills nav-stacked">
+            <li><a href="#html">HTML</a></li>
+            <li><a href="#css&scss">CSS And SCSS</a></li>
+            <li><a href="#search">Google Search And picking up Solution</a></li>
+            <li><a href="#linux&permissions">Linux And Permissions</a></li>
+            <li><a href="#http">HTTP/HTTPS Requests</a></li>
+            <li><a href="#js">JavaScript Basics</a></li>
+            <li><a href="#jquery">jQuery 3</a></li>
+            <li><a href="#bootstrap">Bootstrap 4</a></li>
+            <li><a href="#coding_standard">Coding Standard</a></li>
+            <li><a href="#devtool&dubgging">Developer Tool and Debugging</a></li>
+            {#<li><a href="#extra">IDE</a></li>#}
+            <li><a href="#git">Git</a></li>
+            {#<li><a href="#syfony">Symfony Folder structure</a></li>#}
+            <li><a href="#twig">TWIG</a></li>
+        </ol>
+
+        <h4>Phase 2 ( 7 Days )</h4>
+        <ol class="nav nav-pills nav-stacked">
+            <li><a href="#intro">Package manager cli</a></li>
+            <li><a href="#support">Prototype</a></li>
+            <li><a href="#package">Array and Objects</a></li>
+            <li><a href="#html">ES6 And ES17</a></li>
+            <li><a href="#gulp">JS Templating</a></li>
+            <li><a href="#faq">Class and Constructor</a></li>
+            <li><a href="#plugins">Promise</a></li>
+            <li><a href="#extra">async/await</a></li>
+            <li><a href="#extra">import/export</a></li>
+            <li><a href="#extra">Babel</a></li>
+            <li><a href="#extra">Webpack</a></li>
+            <li><a href="#extra">TypeScript</a></li>
+        </ol>
+
+        <h4>Phase 3 ( 5 Days )</h4>
+        <ol class="nav nav-pills nav-stacked">
+            <li><a href="#intro">Project</a></li>
+        </ol>
+
+        <h4>Extra Requirements</h4>
+        <ol class="nav nav-pills nav-stacked">
+            <li><a href="#intro">Plugins</a></li>
+        </ol>
+
+
+    </div>
+    <div class="content">
+
+        <h1 id="html" class="first">HTML</h1>
+
+        <p><strong>HTML (HyperText Markup Language)</strong> is the most basic building block of the Web. It defines the meaning and structure of web content. Other technologies besides HTML are generally used to describe a web page's appearance/presentation (CSS) or functionality/behavior (JavaScript).</p>
+
+        <p>"HyperText" refers to links that connect web pages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. By uploading content to the Internet and linking it to pages created by other people, you become an active participant in the World Wide Web.</p>
+
+        <p>HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as:-</p>
+
+        <pre><code>&lt;head&gt;, &lt;title&gt;, &lt;body&gt;, &lt;header&gt;, &lt;footer&gt;, &lt;article&gt;, &lt;section&gt;, &lt;p&gt;, &lt;div&gt;, &lt;span&gt;, &lt;img&gt;, &lt;aside&gt;, &lt;audio&gt;, &lt;canvas&gt;, &lt;datalist&gt;, &lt;details&gt;, &lt;embed&gt;, &lt;nav&gt;, &lt;output&gt;, &lt;progress&gt;, &lt;video&gt;</code></pre>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>HTML - w3schools</strong> - <a href="https://www.w3schools.com/html/" target="_blank">https://www.w3schools.com/</a></li>
+            <li><strong>HTML - tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/html/" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>HTML - MDN</strong> - <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">https://developer.mozilla.org/</a></li>
+        </ul>
+
+        <h1 id="css&scss">CSS And SCSS</h1>
+
+        <h3>CSS</h3>
+
+        <p>CSS is one of the core languages of the open web and is standardized across browsers according to the <a href="https://www.w3.org/Style/CSS/#specs" target="_blank">W3C specification</a>. Developed in levels, CSS1 is now obsolete, CSS2.1 is a recommendation, and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3" target="_blank">CSS3</a>, now split into smaller modules, is progressing on the standardization track.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>CSS - w3schools</strong> - <a href="https://www.w3schools.com/css/" target="_blank">https://www.w3schools.com/</a></li>
+            <li><strong>CSS - tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/css/" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>CSS - MDN</strong> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">https://developer.mozilla.org/</a></li>
+        </ul>
+
+        <h3>SCSS/SASS</h3>
+
+        <p>CSS on its own can be fun, but stylesheets are getting larger, more complex, and harder to maintain. This is where a preprocessor can help. Sass lets you use features that don't exist in CSS yet like variables, nesting, mixins, inheritance and other nifty goodies that make writing CSS fun again.</p>
+
+        <p>Once you start tinkering with Sass, it will take your preprocessed Sass file and save it as a normal CSS file that you can use in your website.</p>
+
+        <p>The most direct way to make this happen is in your terminal. Once Sass is installed, you can compile your Sass to CSS using the <code>sass</code> command. You'll need to tell Sass which file to build from, and where to output CSS to. For example, running <code>sass input.scss output.css</code> from your terminal would take a single Sass file, <code>input.scss</code>, and compile that file to <code>output.css</code>.</p>
+
+        <p>You can also watch individual files or directories with the <code>--watch</code> flag. The watch flag tells Sass to watch your source files for changes, and re-compile CSS each time you save your Sass. If you wanted to watch (instead of manually build) your <code>input.scss</code> file, you'd just add the watch flag to your command, like so:</p>
+
+        <pre><code>sass --watch input.scss output.css</code></pre>
+
+        <p>You can watch and output to directories by using folder paths as your input and output, and separating them with a colon. In this example:</p>
+
+        <pre><code>sass --watch app/sass:public/stylesheets</code></pre>
+
+        <p>Sass would watch all files in the app/sass folder for changes, and compile CSS to the public/stylesheets folder.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>SCSS - sass-lang</strong> - <a href="https://sass-lang.com/guide" target="_blank">https://sass-lang.com/</a></li>
+            <li><strong>SCSS - tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/sass/" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>SCSS - tutorialzine</strong> - <a href="https://tutorialzine.com/2016/01/learn-sass-in-15-minutes" target="_blank">https://tutorialzine.com/</a></li>
+        </ul>
+
+        <h1 id="search">Google Search And picking up Solution</h1>
+
+        <ul>
+            <li>Use simplest English</li>
+            <li>Make sure you spell your issues correctly</li>
+            <li>Add as much important keyworks as possible, don’t over do it</li>
+            <li>Be sure to check at least first 4 results before deciding to try something else.</li>
+            <li>Use Google’s special punctuation features (*, “”, etc)</li>
+            <li>StackOverflow is the boss (Sometimes Github too help)</li>
+            <li>Read the documentation (pure old-school reading)</li>
+            <li>Still failed? Try rephrasing the search term and restart</li>
+        </ul>
+
+        <h4>Important Links</h4>
+
+        <ul>
+            <li><strong>Google</strong> - <a href="https://www.google.co.in/" target="_blank">https://www.google.co.in/</a></li>
+            <li><strong>StackOverflow</strong> - <a href="https://stackoverflow.com/" target="_blank">https://stackoverflow.com/</a></li>
+            <li><strong>GitHub</strong> - <a href="https://github.com/" target="_blank">https://github.com/</a></li>
+        </ul>
+
+        <h1 id="linux&permissions">Linux And Permissions</h1>
+
+        <p>Linux is the most popular server OS. Linux is a clone of UNIX. Knowing one is as good as knowing the other. In this tutorial series, we will be using Linux as it's freely available. The training will require you to execute certain commands. Make sure to practice them!</p>
+
+        <p><strong>What should I know?</strong><br/>Nothing. This tutorial is for absolute beginner's guide to Linux. You don't even have to buy a new PC to learn Linux. You can run Linux, right within your existing Windows or Mac OS systems! (Detailed steps are given in tutorials).</p>
+
+        <p><strong>Important Commands:- <code>ls</code>, <code>cd</code>, <code>sudo</code>, <code>mkdir</code>, <code>chmod</code></strong></p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>javatpoint</strong> - <a href="https://www.javatpoint.com/linux-tutorial" target="_blank">https://www.javatpoint.com/</a></li>
+            <li><strong>tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/unix/" target="_blank">https://www.tutorialspoint.com/</a></li>
+        </ul>
+
+        <h1 id="http">HTTP/HTTPS Requests</h1>
+
+        <p>HTTP stands for Hypertext Transfer Protocol and is used to structure requests and responses over the internet. HTTP requires data to be transferred from one point to another over the network.</p>
+
+        <p>The transfer of resources happens using TCP (Transmission Control Protocol). In viewing this webpage, TCP manages the channels between your browser and the server (in this case, codecademy.com). TCP is used to manage many types of internet connections in which one computer or device wants to send something to another. HTTP is the command language that the devices on both sides of the connection must follow in order to communicate.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>codecademy</strong> - <a href="https://www.codecademy.com/articles/http-requests" target="_blank">https://www.codecademy.com/</a></li>
+            <li><strong>tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/http/http_requests.htm" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>MDN</strong> - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">https://developer.mozilla.org/</a></li>
+        </ul>
+
+        <h1 id="js">JavaScript</h1>
+
+        <p>JavaScript (JS) is a lightweight, interpreted or JIT compiled programming language with first-class functions. Most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js and Apache CouchDB. JS is a prototype-based, multi-paradigm, dynamic scripting language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles.</p>
+
+        <p>This section of the site is dedicated to the JavaScript language itself, and not the parts that are specific to Web pages or other host environments. For information about <a href="https://developer.mozilla.org/en-US/docs/Glossary/API" target="_blank">APIs</a> specific to Web pages, please see <a href="https://developer.mozilla.org/en-US/docs/Web/API" target="_blank">Web APIs</a> and <a href="https://developer.mozilla.org/en-US/docs/Glossary/DOM">DOM</a>.</p>
+
+        <p>The standard for JavaScript is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources" target="_blank">ECMAScript</a>. As of 2012, all <a rel="noopener" href="http://kangax.github.io/compat-table/es5/" target="_blank">modern browsers</a> fully support ECMAScript 5.1. Older browsers support at least ECMAScript 3. On June 17, 2015, <a rel="noopener" href="http://www.ecma-international.org" target="_blank">ECMA International</a> published the sixth major version of ECMAScript,&nbsp;ECMAScript 2015. Since then, ECMAScript standards are on yearly release cycles. This documentation refers to the latest draft version, which is currently <a rel="noopener" href="http://tc39.github.io/ecma262/" target="_blank">ECMAScript 2019</a>.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>w3schools</strong> - <a href="https://www.w3schools.com/js/" target="_blank">https://www.w3schools.com/</a></li>
+            <li><strong>tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/javascript/" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>MDN</strong> - <a href="https://developer.mozilla.org/bm/docs/Web/JavaScript" target="_blank">https://developer.mozilla.org/</a></li>
+        </ul>
+
+        <h1 id="jquery">jQuery</h1>
+
+        <p>jQuery is a fast and concise JavaScript Library created by John Resig in 2006 with a nice motto: Write less, do more. jQuery simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is a JavaScript toolkit designed to simplify various tasks by writing less code. Here is the list of important core features supported by jQuery −</p>
+
+        <p><strong>DOM manipulation</strong> − The jQuery made it easy to select DOM elements, negotiate them and modifying their content by using cross-browser open source selector engine called Sizzle.</p>
+
+        <p><strong>Event handling</strong> − The jQuery offers an elegant way to capture a wide variety of events, such as a user clicking on a link, without the need to clutter the HTML code itself with event handlers.</p>
+
+        <p><strong>AJAX Support</strong> − The jQuery helps you a lot to develop a responsive and featurerich site using AJAX technology.</p>
+
+        <p><strong>Animations</strong> − The jQuery comes with plenty of built-in animation effects which you can use in your websites.</p>
+
+        <p><strong>Lightweight</strong> − The jQuery is very lightweight library - about 19KB in size (Minified and gzipped).</p>
+
+        <p><strong>Cross Browser Support</strong> − The jQuery has cross-browser support, and works well in IE 6.0+, FF 2.0+, Safari 3.0+, Chrome and Opera 9.0+</p>
+
+        <p><strong>Latest Technology</strong> − The jQuery supports CSS3 selectors and basic XPath syntax.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>w3schools</strong> - <a href="https://www.w3schools.com/jquery/" target="_blank">https://www.w3schools.com/</a></li>
+            <li><strong>tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/jquery/jquery-overview.htm" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>jquery</strong> - <a href="https://api.jquery.com/" target="_blank">https://jquery.com/</a></li>
+        </ul>
+
+        <h1 id="bootstrap">Bootstrap</h1>
+
+        <p>Build responsive, mobile-first projects on the web with the world's most popular front-end component library.</p>
+
+        <p>Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>w3schools</strong> - <a href="https://www.w3schools.com/bootstrap4/" target="_blank">https://www.w3schools.com/</a></li>
+            <li><strong>getbootstrap</strong> - <a href="https://getbootstrap.com/docs/4.1/getting-started/introduction/" target="_blank">https://getbootstrap.com/</a></li>
+        </ul>
+
+        <h1 id="coding_standard">Coding Standard</h1>
+
+        <p>
+            Coding conventions are style guidelines for programming. They typically cover:
+
+            <ul>
+                <li>Naming and declaration rules for variables and functions.</li>
+                <li>Rules for the use of white space, indentation, and comments.</li>
+                <li>Programming practices and principles</li>
+                <li>Coding conventions secure quality:</li>
+            </ul>
+
+            <ul>
+                <li>Improves code readability</li>
+                <li>Make code maintenance easier</li>
+            </ul>
+            Coding conventions can be documented rules for teams to follow, or just be your individual coding practice.
+        </p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>Google</strong> - <a href="https://google.github.io/styleguide/jsguide.html" target="_blank">https://google.github.io/</a></li>
+        </ul>
+
+        <h1 id="devtool&dubgging">Developer Tool and Debugging</h1>
+
+        <p>Chrome DevTools is a set of web developer tools built directly into the Google Chrome browser. DevTools can help you edit pages on-the-fly and diagnose problems quickly, which ultimately helps you build better websites, faster.</p>
+
+        <p>With DevTools you can view and change any page. Even the Google homepage, as the video demonstrates.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>Chrome DevTool</strong> - <a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank">https://developers.google.com/</a></li>
+            <li><strong>Chrome Debugging</strong> - <a href="https://developers.google.com/web/tools/chrome-devtools/javascript/" target="_blank">https://developers.google.com/</a></li>
+        </ul>
+
+        <h1 id="git">Git</h1>
+
+        {#<h3>CSS</h3>#}
+
+        <p>Git is a version-control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source-code management in software development,[8] but it can be used to keep track of changes in any set of files. As a distributed revision-control system, it is aimed at speed,[9] data integrity,[10] and support for distributed, non-linear workflows.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>GIT</strong> - <a href="https://git-scm.com/doc" target="_blank">https://git-scm.com/</a></li>
+            <li><strong>tutorialspoint</strong> - <a href="https://www.tutorialspoint.com/git/" target="_blank">https://www.tutorialspoint.com/</a></li>
+            <li><strong>BitBucket</strong> - <a href="https://www.atlassian.com/git/tutorials" target="_blank">https://www.atlassian.com/</a></li>
+        </ul>
+
+        <h1 id="twig">Twig</h1>
+
+        <p>Twig is a modern template engine for PHP</p>
+        <p><strong>Fast</strong>: Twig compiles templates down to plain optimized PHP code. The overhead compared to regular PHP code was reduced to the very minimum.</p>
+        <p><strong>Secure</strong>: Twig has a sandbox mode to evaluate untrusted template code. This allows Twig to be used as a template language for applications where users may modify the template design.</p>
+        <p><strong>Flexible</strong>: Twig is powered by a flexible lexer and parser. This allows the developer to define its own custom tags and filters, and create its own DSL.</p>
+
+        <h4>Reference</h4>
+
+        <ul>
+            <li><strong>Twig</strong> - <a href="https://twig.symfony.com/" target="_blank">https://twig.symfony.com/</a></li>
+        </ul>
+    </div>
+{% endblock %}
