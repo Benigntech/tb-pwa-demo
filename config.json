@@ -1,0 +1,19 @@
+{
+  "db" : {
+    "server" : "mongodb://127.0.0.1:27017/",
+    "name" : "ln_training"
+  },
+  "auth" : {
+    "secret": "supersecret"
+  },
+  "roles": {
+    "USER" : 1,
+    "ADMIN" : 7,
+    "SUPER_ADMIN": 32767
+  },
+  "gender" : {
+    "MALE" : "male",
+    "FEMALE" : "female",
+    "OTHER" : "other"
+  }
+}

@@ -29,6 +29,11 @@
                 <li>
                     <a href="https://lecturenotes.in">Visit Website</a>
                 </li>
+                {% if request.user %}
+                    <li>
+                        <a href="/auth/logout">Logout</a>
+                    </li>
+                {% endif %}
                 {#<li>#}
                     {#<a href="changelog.txt">Changelog</a>#}
                 {#</li>#}
