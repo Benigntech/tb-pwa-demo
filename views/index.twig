@@ -2,9 +2,10 @@
 
 {% block body %}
     <h1>Hello {{ request.user.name }}</h1>
-    <h2>Select Your Training</h2>
-    <p>
-        <a class="btn btn-primary" href="/training/js">JavaScript And UI</a>
-        <a class="btn btn-primary" href="/training/php">PHP</a>
-    </p>
+    <a class="btn btn-primary" href="/course">Select your course</a>
+    {#<h2>Select Your Training</h2>#}
+    {#<p>#}
+        {#<a class="btn btn-primary" href="/training/js">JavaScript And UI</a>#}
+        {#<a class="btn btn-primary" href="/training/php">PHP</a>#}
+    {#</p>#}
 {% endblock %}

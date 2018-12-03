@@ -10,6 +10,18 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(function (reg) {
+                    // registration worked
+                    console.log('Registration succeeded. Scope is ' + reg.scope);
+                }).catch(function (error) {
+                // registration failed
+                console.log('Registration failed with ' + error);
+            });
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-default">
@@ -31,6 +43,8 @@
                 </li>
                 {% if request.user %}
                     <li>
+                        <a href="/cart">Cart</a>
+                    </li><li>
                         <a href="/auth/logout">Logout</a>
                     </li>
                 {% endif %}
@@ -46,7 +60,11 @@
     {% block body %}{% endblock %}
 </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/notify.min.js"></script>
+
+{% block javascripts %}
+{% endblock %}
 </body>
 </html>

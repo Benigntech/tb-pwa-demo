@@ -1,0 +1,56 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>Hello {{ request.user.name }}</h1>
+    <h2>Your Cart</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cartItem in cartItems %}
+            <tr>
+                <td>{{ cartItem.item.name }}</td>
+                <td>{{ cartItem.item.description }}</td>
+                <td>{{ cartItem.item.price }}</td>
+                <td>
+                    {#<form method="post" action="/cart/{{ cartItem._id }}">#}
+                        {#<input type="hidden" name="course" value="{{ course._id }}">#}
+                        <button class="btn btn-danger remove-cart-btn" data-id="{{ cartItem._id }}" type="submit">Remove</button>
+                    {#</form>#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-success pull-right">Proceed to payment</button>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).on("click", ".remove-cart-btn", function () {
+            const $this = $(this);
+            const id = $this.data("id");
+            const $tr = $this.closest("tr");
+            $.ajax({
+                url: `/cart/${ id }`,
+                type: 'DELETE',
+                // beforeSend: function (request) {
+                //     request.setRequestHeader('X-CSRF-Token', window.csrfToken);
+                // },
+                success: function () {
+                    $tr.remove();
+                    $.notify("Successfully removed", "success");
+                },
+                error: function (error) {
+                    $.notify(error.responseJSON.message, "error");
+                }
+            })
+        });
+    </script>
+{% endblock %}

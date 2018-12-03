@@ -3,9 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "workbox": "workbox wizard",
+    "sw:generate": "workbox generateSW ServiceWorker/workbox-config.js",
+    "sw:test": "babel public/sw_generated.js --out-file public/sw.js",
+    "sw:prod": "babel public/sw_generated.js --out-file public/sw.js --presets=minify"
   },
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-minify": "^0.4.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
@@ -17,6 +24,11 @@
     "morgan": "~1.9.0",
     "node-sass-middleware": "0.11.0",
     "shortid": "^2.2.14",
-    "twig": "~0.10.3"
-  }
+    "twig": "~0.10.3",
+    "workbox-cli": "^3.6.3"
+  },
+  "main": "app.js",
+  "repository": "git@gitlab.com:santanup-ln/lecturenotes-training.git",
+  "author": "Santanu Prasad Sahoo <santanup@lecturenotes.in>",
+  "license": "MIT"
 }

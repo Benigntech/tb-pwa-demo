@@ -9,6 +9,8 @@ var db = require('./db');
 var indexRouter = require('./routes/index');
 var trainingRouter = require('./controller/training/trainingController');
 var authRouter = require('./controller/auth/AuthController');
+var courseRouter = require('./controller/course/CourseController');
+var cartRouter = require('./controller/cart/CartController');
 
 var app = express();
 
@@ -31,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/training', trainingRouter);
 app.use('/auth', authRouter);
+app.use('/course', courseRouter);
+app.use('/cart', cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

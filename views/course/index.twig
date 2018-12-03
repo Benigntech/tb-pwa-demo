@@ -1,0 +1,61 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>Hello {{ request.user.name }}</h1>
+    <h2 class="pull-left">Select your course</h2>
+    <div class="pull-right">
+        {% if allowEdit %}
+            <a class="btn btn-primary" href="/course/viewall">View All</a>
+        {% endif %}
+        <a class="btn btn-primary" href="/cart">View Cart</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for course in courses %}
+            <tr>
+                <td>{{ course.name }}</td>
+                <td>{{ course.description }}</td>
+                <td>{{ course.price }}</td>
+                <td>
+                    <button class="btn btn-primary add-cart-btn" data-id="{{ course._id }}">Add To Cart</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).on("click", ".add-cart-btn", function () {
+            const $this = $(this);
+            const courseId = $this.data("id");
+            const $tr = $this.closest("tr");
+            $.ajax({
+                url: `/cart/add`,
+                type: 'POST',
+                // beforeSend: function (request) {
+                //     request.setRequestHeader('X-CSRF-Token', window.csrfToken);
+                // },
+                contentType: "application/json",
+                data: JSON.stringify({courseId}),
+                success: function () {
+                    $tr.remove();
+                    $.notify("Added Successfully", "success");
+                },
+                error: function (error) {
+                    // console.log(error);
+                    $.notify(error.responseJSON.message, "error");
+                }
+            })
+        });
+    </script>
+{% endblock %}
