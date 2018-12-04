@@ -16,7 +16,7 @@ module.exports = {
     // ],
 
     globPatterns: [
-        "**/*.{js,css}"
+        "*{javascripts,stylesheets}*/*.{js,css,jpg,jpeg,png}"
     ],
 
     //cache destination
@@ -31,7 +31,7 @@ module.exports = {
     runtimeCaching: [
         {
             // Match any request ends with .png, .jpg, .jpeg or .svg.
-            urlPattern: /(^((?!images\/).)*(jpg|jpeg|png|gif|svg))$/,
+            urlPattern: /(^((?!images\/).)*(jpg|jpeg|png|gif|svg|ico))$/,
 
             // Apply a cache-first strategy.
             handler: 'cacheFirst',
@@ -74,11 +74,11 @@ module.exports = {
                 }
             }
         }
-    ]
+    ],
 
-    // navigateFallbackBlacklist: [ /(.*(admin.).*(js|css))/ ],
+    navigateFallbackBlacklist: [ /(.*((CacheManager|sw).).*(js|css))|(.*((workbox-.*\/).).*(js|css))/ ],
     //
-    // importScripts: ["./CacheManager.min.js"],
+    importScripts: ["./CacheManager.js"],
     //
     // offlineGoogleAnalytics: true
 };

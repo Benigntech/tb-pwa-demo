@@ -116,3 +116,14 @@ h4 {
     width: 70px;
     line-height: 70px;
     font-size: 36px; }
+
+.offline-alert-container{
+  display: none;
+  margin-top: 60px;
+}
+body.offline .offline-alert-container{
+  display: block;
+}
+body.offline h1{
+  padding-top: 0;
+}

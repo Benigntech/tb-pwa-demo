@@ -57,12 +57,43 @@
 </nav>
 
 <div class="container-fluid">
+    <div class="offline-alert-container">
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Oh! no</strong> You are not connected to Internet.
+        </div>
+    </div>
     {% block body %}{% endblock %}
 </div>
 
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/bootstrap.min.js"></script>
 <script src="/javascripts/notify.min.js"></script>
+<script src="/javascripts/localStorageCache.js"></script>
+
+<script>
+
+    window.localStorageCache = new LocalStorageCache();
+
+    const $body = $("body");
+
+    window.addEventListener("load", () => {
+        if (navigator.onLine) {
+            $body.removeClass("offline")
+        } else {
+            $body.addClass("offline")
+        }
+    }, true);
+
+    window.addEventListener("online", () => {
+        $body.removeClass("offline")
+    }, true);
+
+    window.addEventListener("offline", () => {
+        $body.addClass("offline")
+    }, true);
+
+</script>
 
 {% block javascripts %}
 {% endblock %}

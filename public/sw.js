@@ -14,6 +14,8 @@
 importScripts("workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({ modulePathPrefix: "workbox-v3.6.3" });
 
+importScripts("./CacheManager.js");
+
 workbox.core.setCacheNameDetails({ prefix: "sw" });
 
 workbox.skipWaiting();
@@ -39,13 +41,10 @@ self.__precacheManifest = [{
 }, {
   "url": "stylesheets/style.css",
   "revision": "d513fc040a31435f4a2ca9606a2be3ef"
-}, {
-  "url": "sw.js",
-  "revision": "5f1210f59fc223a0eb983807c79fc4fa"
 }].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerRoute(/(^((?!images\/).)*(jpg|jpeg|png|gif|svg))$/, workbox.strategies.cacheFirst({ "cacheName": "images", plugins: [new workbox.expiration.Plugin({ "maxEntries": 100, "purgeOnQuotaError": false })] }), 'GET');
+workbox.routing.registerRoute(/(^((?!images\/).)*(jpg|jpeg|png|gif|svg|ico))$/, workbox.strategies.cacheFirst({ "cacheName": "images", plugins: [new workbox.expiration.Plugin({ "maxEntries": 100, "purgeOnQuotaError": false })] }), 'GET');
 workbox.routing.registerRoute(/(^((?!(javascripts|stylesheets)).)*(css|js|ttf|eot|woff|woff2))$/, workbox.strategies.cacheFirst({ "cacheName": "assets", plugins: [new workbox.expiration.Plugin({ "maxEntries": 100, "purgeOnQuotaError": false })] }), 'GET');
 workbox.routing.registerRoute(/(.*)\/(.*)/, workbox.strategies.networkFirst({ "cacheName": "offline-pages", plugins: [new workbox.cacheableResponse.Plugin({ "statuses": [0, 200] })] }), 'GET');
