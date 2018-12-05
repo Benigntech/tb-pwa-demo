@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Snake</title>
+    <link rel="stylesheet" href="/javascripts/snake/style.css">
+    <script src="/javascripts/snake/jquery-2.2.0.min.js"></script>
+    <script src="/javascripts/localStorageCache.js"></script>
+    <script>
+        var score = {% if game.score %}{{ game.score }}{% else %}5{% endif %};
+        const gameId = "{{ game._id }}";
+        let GameFinished = false;
+
+        window.localStorageCache = new LocalStorageCache();
+        const cache = localStorageCache.open("snake");
+
+        const {result = {data: null}} = cache.result;
+
+        const {data} = result;
+
+        if (data && data.score && !data.finished) score = data.score - 1;
+
+        const updateLocalStorageResult = ( score, finished = false ) => {
+
+            if (GameFinished) return;
+
+            if (data && data.score ){
+                if (data.score < score) {
+                    cache.put('result', {score, finished});
+                }
+            } else {
+                cache.put('result', {score, finished});
+            }
+
+            if(navigator.onLine){
+
+                if(finished) return finishGame(score)
+                    .then( () => {
+                        GameFinished = true;
+                        cache.put('result', null);
+                    });
+                syncScore(score);
+            }
+        };
+
+        const syncScore = score => {
+            return new Promise(( resolve, reject ) => {
+                $.ajax({
+                    url: `/game/snake/update`,
+                    type: 'PUT',
+                    contentType: "application/json",
+                    data: JSON.stringify({score, gameId}),
+                    success: resolve,
+                    error: reject
+                })
+            });
+        };
+
+        const finishGame = score => {
+            return new Promise(( resolve, reject ) => {
+                $.ajax({
+                    url: `/game/snake/finish`,
+                    type: 'PUT',
+                    contentType: "application/json",
+                    data: JSON.stringify({score, gameId}),
+                    success: resolve,
+                    error: reject
+                })
+            });
+        };
+
+        const updateAndSync = ( time = 2000 ) => {
+            setTimeout( () => {
+
+                const {result = {data: null}} = cache.result;
+                const {data} = result;
+                updateLocalStorageResult( data.score, data.finished );
+                updateAndSync();
+            }, time);
+        };
+    </script>
+    <script src="/javascripts/snake/snake.js"></script>
+    <script src="/javascripts/snake/hammer.min.js"></script>
+    <script>
+        updateAndSync();
+
+        window.addEventListener("online", () => {
+            updateAndSync(0);
+        }, true);
+
+        window.addEventListener("offline", () => {
+            updateAndSync(0);
+        }, true);
+
+    </script>
+    <link rel="stylesheet" href="/javascripts/snake/animate.css">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+<main>
+    <div id="field"></div>
+</main>
+
+<div id="infoAlert" class="animated"></div>
+</body>
+
+</html>

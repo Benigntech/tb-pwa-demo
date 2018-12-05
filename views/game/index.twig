@@ -2,8 +2,9 @@
 
 {% block body %}
     <h1>Hello {{ request.user.name }}</h1>
-    <a class="btn btn-primary" href="/course">Select your course</a>
-    <a class="btn btn-primary" href="/game">Select Game</a>
+    <a class="btn btn-primary" href="/game/snake/start">Start Snake Game</a>
+    <a class="btn btn-primary" href="/game/snake/score">View Score</a>
+    {#<a class="btn btn-primary" href="/games">Select Game</a>#}
     {#<h2>Select Your Training</h2>#}
     {#<p>#}
         {#<a class="btn btn-primary" href="/training/js">JavaScript And UI</a>#}

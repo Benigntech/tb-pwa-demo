@@ -11,6 +11,7 @@ var trainingRouter = require('./controller/training/trainingController');
 var authRouter = require('./controller/auth/AuthController');
 var courseRouter = require('./controller/course/CourseController');
 var cartRouter = require('./controller/cart/CartController');
+var gameRouter = require('./controller/game/gameController');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/training', trainingRouter);
 app.use('/auth', authRouter);
 app.use('/course', courseRouter);
 app.use('/cart', cartRouter);
+app.use('/game', gameRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

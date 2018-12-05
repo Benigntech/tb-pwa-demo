@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+    <h1>Snake Score {% if games is not empty %}Highest Score - {{ games[0].score }}{% endif %}</h1>
+    <div class="alert-container"></div>
+    <table class="table table-bordered cart-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Finished</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.createdBy.name }}</td>
+                <td>{{ game.score }}</td>
+                <td>{% if game.finished %}True{% else %}False{% endif %}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
