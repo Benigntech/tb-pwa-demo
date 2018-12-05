@@ -3,6 +3,10 @@ const cache = localStorageCache.open("add-to-cart-requested");
 
 const $alertContainer = $('.alert-container');
 
+const $cartTable = $('.cart-table tbody');
+
+const $courseTable = $(".course-table");
+
 const addItemToCart = courseId => {
     return new Promise(( resolve, reject ) => {
         $.ajax({
@@ -16,13 +20,35 @@ const addItemToCart = courseId => {
     });
 };
 
-const removeItemFromList = (itemList = []) => {
+const removeItemFromCourseList = (itemList = []) => {
     itemList.map( item => {
-        const $item = $(`[data-id="${ item }"]`);
+        const $item = $courseTable.find(`[data-id="${ item }"]`);
         if($item.length){
             const $tr = $item.closest("tr");
             $tr.remove();
         }
+    });
+};
+
+const cartListTemplate = item => {
+    return `
+        <tr class="pending">
+            <td>${ item.name }</td>
+            <td>${ item.description }</td>
+            <td>${ item.price }</td>
+            <td>
+                <button class="btn btn-warning disabled" data-id="${ item.id }" >Pending...</button>
+            </td>
+        </tr>
+    `;
+};
+
+const addItemToCartList = (itemList = []) => {
+    $(".pending").remove();
+    itemList.map( item => {
+        if ($(`.pending [data-id="${ item.id }"]`).length) return;
+        const template = cartListTemplate(item);
+        $cartTable.append(template);
     });
 };
 
@@ -32,7 +58,9 @@ const checkAndUpdateItemList = () => {
 
     const {data} = items;
 
-    removeItemFromList(data);
+    if ($courseTable.length) removeItemFromCourseList(data);
+
+    if ($cartTable.length) addItemToCartList(data);
 
     if( window.navigator.onLine && data.length ) {
 
@@ -40,7 +68,7 @@ const checkAndUpdateItemList = () => {
 
         const allPromise = [];
 
-        data.map(item => allPromise.push(addItemToCart(item)));
+        data.map(item => allPromise.push(addItemToCart(item.id)));
 
         Promise.all(allPromise)
             .then(response => {
@@ -61,8 +89,6 @@ const checkAndUpdateItemList = () => {
         );
     }
 };
-
-checkAndUpdateItemList();
 
 window.addEventListener("load", () => {
     checkAndUpdateItemList();
@@ -98,7 +124,18 @@ $(document).on("click", ".add-cart-btn", function () {
 
         const {data} = items;
 
-        data.push(courseId);
+        const name = $this.data("name");
+
+        const description = $this.data("description");
+
+        const price = $this.data("price");
+
+        data.push({
+            id: courseId,
+            name,
+            description,
+            price
+        });
 
         cache.put("items", data);
 

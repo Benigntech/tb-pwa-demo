@@ -11,7 +11,7 @@
         {% endif %}
         <a class="btn btn-primary" href="/cart">View Cart</a>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered course-table">
         <thead>
         <tr>
             <th>Name</th>
@@ -27,7 +27,7 @@
                 <td>{{ course.description }}</td>
                 <td>{{ course.price }}</td>
                 <td>
-                    <button class="btn btn-primary add-cart-btn" data-id="{{ course._id }}">Add To Cart</button>
+                    <button class="btn btn-primary add-cart-btn" data-id="{{ course._id }}" data-name="{{ course.name }}" data-description="{{ course.description }}" data-price="{{ course.price }}">Add To Cart</button>
                 </td>
             </tr>
         {% endfor %}
