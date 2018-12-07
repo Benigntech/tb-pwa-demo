@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../auth/VerifyToken');
 const GetAuthUser = require('../auth/GetAuthUser');
-const Permit = require('../auth/Permit');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -29,7 +28,7 @@ router.get('/', VerifyToken, GetAuthUser, function(request, response, next) {
         });
 });
 
-router.get('/viewall', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(request, response, next) {
+router.get('/viewall', VerifyToken, GetAuthUser, function(request, response, next) {
     Cart
         .find({})
         .populate("createdBy")
@@ -42,7 +41,7 @@ router.get('/viewall', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(r
         });
 });
 
-router.post('/add', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(request, res) {
+router.post('/add', VerifyToken, GetAuthUser, function(request, res) {
 
     const {courseId} = request.body;
 

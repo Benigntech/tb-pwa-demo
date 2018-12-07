@@ -127,3 +127,14 @@ body.offline .offline-alert-container{
 body.offline h1{
   padding-top: 0;
 }
+.sponsored-by{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #102b45;
+  color: #ffffff;
+  width: 100%;
+  text-align: center;
+  padding: 6px 10px;
+  height: auto;
+}

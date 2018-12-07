@@ -25,9 +25,9 @@ router.get('/', VerifyToken, function(req, res, next) {
 
 router.post('/login', function(req, res) {
 
-    const {email, password} = req.body;
+    const {name, password} = req.body;
 
-    User.findOne({ email })
+    User.findOne({ name })
         .exec(function (err, user) {
 
             if (err) return res.redirect('../error/500?error=' + encodeURI("Error on the server") );
@@ -58,13 +58,11 @@ router.get('/logout', function(req, res) {
 
 router.post('/register', function(req, res) {
 
-    const {name, email, password, confirmPassword} = req.body;
+    const {name, password} = req.body;
 
-    if (!name || !email || !password || !confirmPassword) return res.status(400).send('Invalid input');
+    if (!name || !password) return res.status(400).send('Invalid input');
 
-    if (password !== confirmPassword) return res.status(400).send('Password mismatch');
-
-    User.findOne({ email }, function (err, user) {
+    User.findOne({ name }, function (err, user) {
         console.log(err);
 
         if (err) return res.status(500).send('Error on the server.');
@@ -75,7 +73,6 @@ router.post('/register', function(req, res) {
 
         var userData = {
             name,
-            email,
             password: hashedPassword,
         };
 

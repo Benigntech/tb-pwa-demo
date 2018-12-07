@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const VerifyToken = require('../auth/VerifyToken');
 const GetAuthUser = require('../auth/GetAuthUser');
-const Permit = require('../auth/Permit');
 const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -15,8 +14,6 @@ const Course = require("../../model/Course");
 const Cart = require("../../model/Cart");
 
 router.get('/', VerifyToken, GetAuthUser, function(request, response, next) {
-
-    const allowEdit = request.user.role === roles.ADMIN;
 
     Course
         .find({deleted: false})
@@ -48,14 +45,13 @@ router.get('/', VerifyToken, GetAuthUser, function(request, response, next) {
 
                     response.render('course/index', {
                         request,
-                        allowEdit,
                         courses
                     });
                 });
         });
 });
 
-router.get('/viewall', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(request, response, next) {
+router.get('/viewall', VerifyToken, GetAuthUser, function(request, response, next) {
     Course
         .find({})
         .populate("createdBy")
@@ -68,7 +64,7 @@ router.get('/viewall', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(r
         });
 });
 
-router.post('/add', VerifyToken, GetAuthUser, Permit(roles.ADMIN), function(req, res) {
+router.post('/add', VerifyToken, GetAuthUser, function(req, res) {
 
     const {name, description, price} = req.body;
 
