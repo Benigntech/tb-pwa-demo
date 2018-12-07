@@ -86,8 +86,8 @@
 
     {% if request.user %}
         const name = "{{ request.user.name }}";
-        const cache = localStorageCache.open("currentUser");
-        cache.put("details", { name });
+        const currentUserCache = localStorageCache.open("currentUser");
+        currentUserCache.put("details", { name });
     {% endif %}
 
     /**
