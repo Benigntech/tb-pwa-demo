@@ -1,40 +1,38 @@
 
 module.exports = {
 
-    //workbox import form
-    importWorkboxFrom: 'local',
+    // workbox import form
+    importWorkboxFrom: 'local', //{ local | cdn }
 
-    //main dir
+    // main global/public dir
     globDirectory: "public",
 
-    //maximum file size
+    // maximum file size
     maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
 
-    //precache patterns
-    // globPatterns: [
-    //     "build/0*.{js,css}", "build/polyfill*.{js,css}", 'build/manifest*.{js,css}', 'build/vendor*.{js,css}', 'build/app*.{js,css}', 'build/material*.{js,css}'
-    // ],
-
+    // global pattern for pre catching static assets
     globPatterns: [
         "*{javascripts,stylesheets}*/*.{js,css,jpg,jpeg,png}"
     ],
 
-    //cache destination
+    // sw generate destination
     swDest: "public/sw_generated.js",
 
-    //cache and indexedDb name
+    // cache and indexedDb name
     cacheId: 'sw',
 
     skipWaiting: true,
     clientsClaim: true,
 
+    // for run time caching
     runtimeCaching: [
         {
             // Match any request ends with .png, .jpg, .jpeg or .svg.
             urlPattern: /(^((?!images\/).)*(jpg|jpeg|png|gif|svg|ico))$/,
 
             // Apply a cache-first strategy.
-            handler: 'cacheFirst',
+            // for more information about cache strategies visit https://developers.google.com/web/tools/workbox/modules/workbox-strategies
+            handler: 'cacheFirst', // { cacheFirst | staleWhileRevalidate | networkFirst }
 
             options: {
 
@@ -46,14 +44,16 @@ module.exports = {
                     maxEntries: 100,
                 },
             },
-        }, {
+        },
+        {
             // Match any request ends with css|js|ttf|eot|woff|woff2
             urlPattern: /(^((?!(javascripts|stylesheets)).)*(css|js|ttf|eot|woff|woff2))$/,
 
             // Apply a cache-first strategy.
-            handler: 'cacheFirst',
+            handler: 'cacheFirst', // { cacheFirst | staleWhileRevalidate | networkFirst }
 
             options: {
+
                 // Use a custom cache name.
                 cacheName: 'assets',
 
@@ -62,9 +62,14 @@ module.exports = {
                     maxEntries: 100,
                 },
             },
-        }, {
+        },
+        {
+            // match any url, you can use custom RegEx pattern for caching any page
             urlPattern:  /(.*)\/(.*)/,
-            handler: 'networkFirst',
+
+            // apply network-First strategy
+            handler: 'networkFirst', // { cacheFirst | staleWhileRevalidate | networkFirst }
+
             options: {
 
                 cacheName: 'offline-pages',
@@ -76,9 +81,13 @@ module.exports = {
         }
     ],
 
+    // ignore path for catching
     navigateFallbackBlacklist: [ /(.*((CacheManager|sw).).*(js|css))|(.*((workbox-.*\/).).*(js|css))/ ],
-    //
+
+    // import other files
     importScripts: ["./CacheManager.js"],
-    //
-    // offlineGoogleAnalytics: true
+
+    // google analytics for offline browsing
+    offlineGoogleAnalytics: true
+
 };

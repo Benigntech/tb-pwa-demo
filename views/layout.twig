@@ -43,8 +43,12 @@
                 </li>
                 {% if request.user %}
                     <li>
+                        <a href="/course">Courses</a>
+                    </li>
+                    <li>
                         <a href="/cart">Cart</a>
-                    </li><li>
+                    </li>
+                    <li>
                         <a href="/auth/logout">Logout</a>
                     </li>
                 {% endif %}
@@ -74,11 +78,28 @@
 
 <script>
 
+    /**
+     * local storage cache manager
+     * @type {LocalStorageCache}
+     */
     window.localStorageCache = new LocalStorageCache();
 
+    {% if request.user %}
+        const name = "{{ request.user.name }}";
+        const cache = localStorageCache.open("currentUser");
+        cache.put("details", { name });
+    {% endif %}
+
+    /**
+     * select body
+     * @type {jQuery|HTMLElement}
+     */
     const $body = $("body");
 
+    // on load event listener
     window.addEventListener("load", () => {
+
+        //if navigator offline show offline alert
         if (navigator.onLine) {
             $body.removeClass("offline")
         } else {
@@ -86,10 +107,12 @@
         }
     }, true);
 
+    // on navigator online event listener
     window.addEventListener("online", () => {
         $body.removeClass("offline")
     }, true);
 
+    // on navigator offline event listener
     window.addEventListener("offline", () => {
         $body.addClass("offline")
     }, true);
