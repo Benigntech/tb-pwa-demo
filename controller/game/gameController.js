@@ -64,6 +64,16 @@ router.get('/:name/score', VerifyToken, GetAuthUser, function (req, res) {
         });
 });
 
+router.get('/:name/reset', VerifyToken, GetAuthUser, function (req, res) {
+
+    Game.collection.drop();
+        // .db.db.dropCollection("game", function(err, result) {
+        //     console.log(err, result);
+        //     if (err) return res.status(500).send("There was a problem updating the user.");
+            res.status(200).send("Success");
+        // });
+});
+
 
 
 module.exports = router;
