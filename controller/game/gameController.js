@@ -52,7 +52,7 @@ router.put('/:name/finish', VerifyToken, function (req, res) {
     });
 });
 
-router.get('/:name/score', VerifyToken, function (req, res) {
+router.get('/:name/score', VerifyToken, GetAuthUser, function (req, res) {
 
     Game
         .find()

@@ -6,7 +6,7 @@ var app = express();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.redirect('/training');
+  res.redirect('/game');
 });
 
 module.exports = router;

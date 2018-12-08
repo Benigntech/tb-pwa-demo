@@ -60,14 +60,15 @@ router.post('/register', function(req, res) {
 
     const {name, password} = req.body;
 
+    console.log({name, password});
+
     if (!name || !password) return res.status(400).send('Invalid input');
 
     User.findOne({ name }, function (err, user) {
-        console.log(err);
 
         if (err) return res.status(500).send('Error on the server.');
 
-        if (user) return res.status(401).send('Email id already registered');
+        if (user) return res.status(401).send('username already exist');
 
         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
@@ -78,7 +79,9 @@ router.post('/register', function(req, res) {
 
         User.create( userData, function (err, user) {
 
-            if (err) return res.status(500).send("There was a problem registering the user`.");
+            console.log(err);
+
+            if (err) return res.status(500).send("There was a problem registering the user.");
 
             // if user is registered without errors
             // create a token
