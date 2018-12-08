@@ -33,18 +33,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"> <div class="ms-logo ms-logo-white ms-logo-sm">LN</div> Lecture<strong>Notes</strong> Training</a>
+            <a class="navbar-brand" href="/"> <div class="ms-logo ms-logo-white ms-logo-sm">TB</div><strong>PWA - Tech Bhubaneswar 2018</strong></a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="https://lecturenotes.in">Visit Website</a>
+                    <a href="https://lecturenotes.in">Visit LectureNotes</a>
                 </li>
                 {% if request.user %}
                     <li>
+                        <a href="/course">Courses</a>
+                    </li>
+                    <li>
                         <a href="/cart">Cart</a>
-                    </li><li>
+                    </li>
+                    <li>
                         <a href="/auth/logout">Logout</a>
                     </li>
                 {% endif %}
@@ -64,6 +68,7 @@
         </div>
     </div>
     {% block body %}{% endblock %}
+    <div class="sponsored-by">Developed by <strong>LectureNotes Team</strong></div>
 </div>
 
 <script src="/javascripts/jquery.min.js"></script>
@@ -73,11 +78,28 @@
 
 <script>
 
+    /**
+     * local storage cache manager
+     * @type {LocalStorageCache}
+     */
     window.localStorageCache = new LocalStorageCache();
 
+    {% if request.user %}
+        const name = "{{ request.user.name }}";
+        const currentUserCache = localStorageCache.open("currentUser");
+        currentUserCache.put("details", { name });
+    {% endif %}
+
+    /**
+     * select body
+     * @type {jQuery|HTMLElement}
+     */
     const $body = $("body");
 
+    // on load event listener
     window.addEventListener("load", () => {
+
+        //if navigator offline show offline alert
         if (navigator.onLine) {
             $body.removeClass("offline")
         } else {
@@ -85,10 +107,12 @@
         }
     }, true);
 
+    // on navigator online event listener
     window.addEventListener("online", () => {
         $body.removeClass("offline")
     }, true);
 
+    // on navigator offline event listener
     window.addEventListener("offline", () => {
         $body.addClass("offline")
     }, true);

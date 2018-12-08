@@ -1,27 +1,24 @@
 
 const manageSw = () => {
 
-    const addToCartRegex = /(.*)\/cart\/add(.*)/;
+    // self.addEventListener('fetch', function (event) {
+    //
+    //     let url = event.request.url;
+    //
+    //     if (url) {
+    //
+    //         console.log(event.request);
+    //
+    //         if ( !navigator.onLine) {
+    //             return fetch(event.request);
+    //         } else {
+    //
+    //         }
+    //     }
+    //
+    // });
 
-    const addItemToCache = (name, data) => {
-
-    };
-
-
-    self.addEventListener('fetch', function (event) {
-
-        let url = event.request.url;
-
-        if (url.match(addToCartRegex)) {
-            console.log(event.request);
-            if ( !navigator.onLine) {
-                return fetch(event.request);
-            } else {
-
-            }
-        }
-
-    });
+    // write your custom listener
 };
 
 manageSw();

@@ -1,12 +1,32 @@
-
+/**
+ * add to cache cache manager
+ * @type {CacheManager}
+ */
 const cache = localStorageCache.open("add-to-cart-requested");
 
+/**
+ * alert container
+ * @type {jQuery|HTMLElement}
+ */
 const $alertContainer = $('.alert-container');
 
+/**
+ * cart table
+ * @type {jQuery|HTMLElement}
+ */
 const $cartTable = $('.cart-table tbody');
 
+/**
+ * course table
+ * @type {jQuery|HTMLElement}
+ */
 const $courseTable = $(".course-table");
 
+/**
+ * add item to cart ajax
+ * @param courseId {string}
+ * @returns {Promise<any>}
+ */
 const addItemToCart = courseId => {
     return new Promise(( resolve, reject ) => {
         $.ajax({
@@ -20,7 +40,13 @@ const addItemToCart = courseId => {
     });
 };
 
+/**
+ * remove item from course list
+ * @description remove all requested to add cart from course list
+ * @param itemList {Array}
+ */
 const removeItemFromCourseList = (itemList = []) => {
+
     itemList.map( item => {
         const $item = $courseTable.find(`[data-id="${ item }"]`);
         if($item.length){
@@ -30,6 +56,11 @@ const removeItemFromCourseList = (itemList = []) => {
     });
 };
 
+/**
+ * cart list template
+ * @param item {{}}
+ * @returns {string}
+ */
 const cartListTemplate = item => {
     return `
         <tr class="pending">
@@ -43,6 +74,10 @@ const cartListTemplate = item => {
     `;
 };
 
+/**
+ * add requested items to cart list
+ * @param itemList {Array}
+ */
 const addItemToCartList = (itemList = []) => {
     $(".pending").remove();
     itemList.map( item => {
@@ -52,9 +87,14 @@ const addItemToCartList = (itemList = []) => {
     });
 };
 
+/**
+ * check and add item to list
+ * @description check pending requested items, and send to server and show or hide list on DOM
+ */
 const checkAndUpdateItemList = () => {
 
-    const {items = {data: []}} = cache.result;
+    // cached items
+    const {items = {data: []}} = cache.result; // es 2017 syntax
 
     const {data} = items;
 
@@ -90,19 +130,22 @@ const checkAndUpdateItemList = () => {
     }
 };
 
+// load event
 window.addEventListener("load", () => {
     checkAndUpdateItemList();
 }, true);
 
+// navigator online event
 window.addEventListener("online", () => {
     checkAndUpdateItemList();
 }, true);
 
+// navigator offline event
 window.addEventListener("offline", () => {
     checkAndUpdateItemList();
 }, true);
 
-
+// on click event
 $(document).on("click", ".add-cart-btn", function () {
     const $this = $(this);
     const courseId = $this.data("id");
@@ -137,6 +180,7 @@ $(document).on("click", ".add-cart-btn", function () {
             price
         });
 
+        // add item to cache
         cache.put("items", data);
 
         $tr.remove();
