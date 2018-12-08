@@ -27,10 +27,10 @@
 
             if (data && data.score ){
                 if (data.score < score) {
-                    cache.put('result', {score, finished});
+                    cache.put('result', {score, finished, gameId});
                 }
             } else {
-                cache.put('result', {score, finished});
+                cache.put('result', {score, finished, gameId});
             }
 
             if(navigator.onLine){

@@ -25,9 +25,9 @@ router.get('/', VerifyToken, function(req, res, next) {
 
 router.post('/login', function(req, res) {
 
-    const {name, password} = req.body;
+    const {email, password} = req.body;
 
-    User.findOne({ name })
+    User.findOne({ email })
         .exec(function (err, user) {
 
             if (err) return res.redirect('../error/500?error=' + encodeURI("Error on the server") );
@@ -58,30 +58,30 @@ router.get('/logout', function(req, res) {
 
 router.post('/register', function(req, res) {
 
-    const {name, password} = req.body;
+    const { name, email, password } = req.body;
+    // console.log({ name, email, password });
 
-    console.log({name, password});
+    if (!name || !email || !password ) return res.status(400).send('Invalid input');
 
-    if (!name || !password) return res.status(400).send('Invalid input');
+    // if (password !== confirmPassword) return res.status(400).send('Password mismatch');
 
-    User.findOne({ name }, function (err, user) {
+    User.findOne({ email }, function (err, user) {
 
         if (err) return res.status(500).send('Error on the server.');
 
-        if (user) return res.status(401).send('username already exist');
+        if (user) return res.status(401).send('Email id already registered');
 
         var hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
         var userData = {
             name,
+            email,
             password: hashedPassword,
         };
 
         User.create( userData, function (err, user) {
 
-            console.log(err);
-
-            if (err) return res.status(500).send("There was a problem registering the user.");
+            if (err) return res.status(500).send("There was a problem registering the user`.");
 
             // if user is registered without errors
             // create a token

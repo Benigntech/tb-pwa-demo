@@ -11,3 +11,72 @@
         {#<a class="btn btn-primary" href="/training/php">PHP</a>#}
     {#</p>#}
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.localStorageCache = new LocalStorageCache();
+
+        const cache = localStorageCache.open("snake");
+
+        const {result = {data: null}} = cache.result;
+
+        const {data} = result;
+
+        if (!data || !data.score || !data.gameId) {
+
+        } else {
+
+            const syncScore = (score, gameId) => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: `/game/snake/update`,
+                        type: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify({score, gameId}),
+                        success: resolve,
+                        error: reject
+                    })
+                });
+            };
+
+            const finishGame = (score, gameId) => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: `/game/snake/finish`,
+                        type: 'PUT',
+                        contentType: "application/json",
+                        data: JSON.stringify({score, gameId}),
+                        success: resolve,
+                        error: reject
+                    })
+                });
+            };
+
+            const updateLocalStorageResult = (score, finished = false) => {
+
+                if (navigator.onLine) {
+
+                    if (finished) return finishGame(score)
+                        .then(() => {
+                            cache.put('result', null);
+                            // location.reload();
+                        });
+                    syncScore(score)
+                        .then( () => {
+                            // location.reload();
+                        });
+                }
+            };
+
+            updateLocalStorageResult(data.score, data.finished, data.gameId);
+
+            window.addEventListener("online", () => {
+                updateLocalStorageResult(data.score, data.finished, data.gameId);
+            }, true);
+
+            window.addEventListener("offline", () => {
+                updateLocalStorageResult(data.score, data.finished, data.gameId);
+            }, true);
+        }
+    </script>
+{% endblock %}
