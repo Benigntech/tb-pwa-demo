@@ -124,7 +124,7 @@ const checkAndUpdateItemList = () => {
         if (data.length) $alertContainer.html(
             `<div class="alert alert-warning">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                You have ${ data.length } requests pending, please connect to the internet to update your request.
+                You have ${ data.length } requests pending, please connect to the internet to update your requests.
             </div>`
         );
     }
@@ -185,7 +185,7 @@ $(document).on("click", ".add-cart-btn", function () {
 
         $tr.remove();
 
-        $.notify("Your request has been recorded, please connect to the internet to update your requested", "success");
+        $.notify("Your request has been recorded, please connect to the internet to update your request", "success");
 
         checkAndUpdateItemList();
     }
